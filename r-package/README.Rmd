@@ -1,0 +1,98 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ADS8192 Heatmap Package
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/akaur40/ADS8192/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/akaur40/ADS8192/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+This package provides tools for analyzing RNA-seq data from the fission yeast stress response experiment. It includes functions to do the following:
+- Normalize count data
+- Select top variable genes
+- Scale expression matrices
+- Generate annotated heatmaps
+- Extract gene modules
+- Export results
+
+## Installation
+
+You can install the development version of ADS8192 from [GitHub](https://github.com/) with:
+
+``` r
+remotes::install_github("akaur40/ADS8192")
+```
+
+## Quick Start Guide
+
+```{r example}
+devtools::load_all()
+
+#load example data
+data("example_se", package = "ADS8192")
+
+#Run full analysis
+result <- run_heatmap_analysis(example_se)
+
+#view output
+result$heatmap
+head(result$scaled_matrix)
+head(result$gene_modules)
+```
+
+#Example with parameters
+
+```{r}
+devtools::load_all()
+data("example_se", package = "ADS8192")
+
+result <- run_heatmap_analysis(
+  se = example_se,
+  n_top = 500,
+  scale_method = "zscore",
+  gene_k = 5,
+  column_split_by = "strain"
+)
+```
+
+## Command Line Interface (CLI)
+
+This package provides a command-line interface for running the analysis
+Install the CLI launcher:
+```{r}
+ADS8192::install_ads8192_cli()
+```
+
+CLI help:
+```{bash, eval=FALSE}
+ADS8192 heatmap --help
+```
+
+Fallback development usage:
+```{bash, eval=FALSE}
+Rapp exec/ADS8192.R heatmap --help
+```
+
+Example run:
+```{bash, eval=FALSE}
+ADS8192 heatmap \
+  --input example \
+  --n_top 500\
+  --scale_method zscore \
+  --gene_k 5 \
+  --column_split_by strain \
+  --output_dir results/
+```
+

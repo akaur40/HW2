@@ -1,5 +1,0 @@
-Error in validObject(.Object) : 
-  invalid class "SummarizedExperiment" object: 
-    nb of cols in 'assay' (0) must equal nb of rows in 'colData' (6)
-Calls: <Anonymous> ... new_SummarizedExperiment -> new -> initialize -> initialize -> validObject
-Execution halted

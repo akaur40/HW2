@@ -34,7 +34,7 @@ docker build -t ads8192-hw2 .
 ### Usage
 Run the pipeline:
 ```bash
-nextflow run main.nf -profile docker
+nextflow run nextflow/main.nf -profile docker
 ```
 ```md
 ### Output
